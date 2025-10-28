@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Marketing - خدمات تسويقية متكاملة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 5% 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -150px;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            max-width: 900px;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            font-weight: 900;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .section {
+            padding: 100px 5%;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 4rem;
+            font-weight: 400;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .service-icon svg {
+            width: 45px;
+            height: 45px;
+            fill: white;
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 5%;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 900;
+        }
+
+        .stat-item p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+
+        .contact-section {
+            background: #f8f9fa;
+            padding: 100px 5%;
+        }
+
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-button {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">Go Marketing</div>
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#services">خدماتنا</a></li>
+                <li><a href="#stats">إنجازاتنا</a></li>
+                <li><a href="#contact">تواصل معنا</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Go Marketing</h1>
+            <p>نحول أفكارك إلى واقع رقمي مميز ونساعدك في الوصول لجمهورك بطرق إبداعية</p>
+            <button class="cta-button" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+                ابدأ مشروعك الآن
+            </button>
+        </div>
+    </section>
+
+    <section class="section" id="services">
+        <h2 class="section-title">خدماتنا التسويقية</h2>
+        <p class="section-subtitle">نقدم حلول تسويقية متكاملة تناسب جميع احتياجاتك</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 18c-3.86-.93-7-5.01-7-9V8.31l7-3.69 7 3.69V11c0 3.99-3.14 8.07-7 9z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                </div>
+                <h3>التسويق الرقمي</h3>
+                <p>استراتيجيات تسويقية متكاملة عبر جميع المنصات الرقمية لتحقيق أهدافك التجارية وزيادة مبيعاتك</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 2H7c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H7V4h10v16zM12 6.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5zm5 8.5c0 1.66-2.69 2.5-5 2.5s-5-.84-5-2.5v-1h10v1z"/>
+                    </svg>
+                </div>
+                <h3>إدارة السوشيال ميديا</h3>
+                <p>إدارة احترافية لحساباتك على مواقع التواصل الاجتماعي مع محتوى إبداعي يجذب جمهورك المستهدف</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/>
+                        <path d="M7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"/>
+                    </svg>
+                </div>
+                <h3>الإعلانات الممولة</h3>
+                <p>حملات إعلانية مدروسة على فيسبوك وإنستجرام وجوجل لتحقيق أفضل عائد على الاستثمار</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                    </svg>
+                </div>
+                <h3>كتابة المحتوى</h3>
+                <p>محتوى إبداعي ومميز يعكس هوية علامتك التجارية ويتفاعل مع جمهورك بشكل فعال</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 8c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2v2c2.21 0 4-1.79 4-4s-1.79-4-4-4z"/>
+                    </svg>
+                </div>
+                <h3>التصميم الجرافيكي</h3>
+                <p>تصميمات احترافية تبرز هويتك البصرية وتجذب انتباه عملائك بشكل فوري ومؤثر</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/>
+                        <path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H4V4h16v16z"/>
+                    </svg>
+                </div>
+                <h3>تحسين محركات البحث</h3>
+                <p>تحسين ظهور موقعك في نتائج البحث الأولى وزيادة الزيارات العضوية بشكل مستدام</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section" id="stats">
+        <h2 class="section-title" style="-webkit-text-fill-color: white;">إنجازاتنا بالأرقام</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>500+</h3>
+                <p>مشروع ناجح</p>
+            </div>
+            <div class="stat-item">
+                <h3>300+</h3>
+                <p>عميل سعيد</p>
+            </div>
+            <div class="stat-item">
+                <h3>5+</h3>
+                <p>سنوات خبرة</p>
+            </div>
+            <div class="stat-item">
+                <h3>98%</h3>
+                <p>رضا العملاء</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <h2 class="section-title">تواصل معنا</h2>
+        <p class="section-subtitle">نحن هنا لمساعدتك في تحقيق أهدافك التسويقية</p>
+        
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label>الاسم</label>
+                <input type="text" required placeholder="أدخل اسمك">
+            </div>
+            <div class="form-group">
+                <label>البريد الإلكتروني</label>
+                <input type="email" required placeholder="أدخل بريدك الإلكتروني">
+            </div>
+            <div class="form-group">
+                <label>رقم الهاتف</label>
+                <input type="tel" required placeholder="أدخل رقم هاتفك">
+            </div>
+            <div class="form-group">
+                <label>رسالتك</label>
+                <textarea required placeholder="اكتب رسالتك هنا..."></textarea>
+            </div>
+            <button type="submit" class="submit-button">إرسال</button>
+        </form>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 عبده الغنام. جميع الحقوق محفوظة</p>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            // جمع البيانات من النموذج
+            const formData = {
+                name: event.target[0].value,
+                email: event.target[1].value,
+                phone: event.target[2].value,
+                message: event.target[3].value
+            };
+            
+            // إرسال البيانات
+            fetch('https://formspree.io/f/YOUR_FORM_ID', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('✅ تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.');
+                    event.target.reset();
+                } else {
+                    alert('❌ حدث خطأ في الإرسال. يرجى المحاولة مرة أخرى.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('❌ حدث خطأ في الإرسال. يرجى المحاولة مرة أخرى.');
+            });
+        }
+    </script>
+</body>
+</html>
